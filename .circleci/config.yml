@@ -36,11 +36,11 @@ jobs:
           name: Front-End Build
           command: |
             npm run frontend:build
-      -run:
-        name: Front-End Test
-        command: |
-          npm run frontend:test
-      -run:
+      - run:
+          name: Front-End Test
+          command: |
+            npm run frontend:test
+      - run:
           name: Front-End Deploy
           command: |
             npm run frontend:deploy
@@ -54,7 +54,7 @@ jobs:
           name: API Build
           command: |
             npm run api:build
-      -run:
+      - run:
           name: API Deploy
           command: |
             npm run api:deploy
