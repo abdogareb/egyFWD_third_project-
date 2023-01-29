@@ -38,6 +38,8 @@ jobs:
             npm run frontend:build
       - run:
           name: Front-End Test
+          before_script: |
+            export CHROME_BIN=/usr/bin/google-chrome
           command: |
             npm run frontend:test
       - run:
