@@ -52,7 +52,7 @@ jobs:
           command: |
             npm run api:build
 
-  build-deploy:
+  deploy:
     docker:
       # the base image can run most needed actions with orbs
       - image: cimg/node:14.15-browsers
