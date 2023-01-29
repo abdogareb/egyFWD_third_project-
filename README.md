@@ -18,8 +18,8 @@ http://abdogareb.s3-website-us-east-1.amazonaws.com
 
 ## Last successful CircleCi build:
 
-![Alt text](/screenshots/Pipline1.png)
-![Alt text](/screenshots/Pipline2.png)
+![Alt text](/screenshots/build_pipline.png)
+![Alt text](/screenshots/deploy_pipline.png)
 
 ## AWS RDS for the database overview:
 
