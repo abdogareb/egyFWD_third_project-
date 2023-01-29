@@ -77,9 +77,9 @@ workflows:
       - build:
         filters:
         branches:
-              only:  # only branches matching the below regex filters will run
-                - main
-                -master
+          only: # only branches matching the below regex filters will run
+            - main
+            - master
       - deploy:
           requires:
             - build
