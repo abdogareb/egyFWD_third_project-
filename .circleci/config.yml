@@ -63,9 +63,31 @@ jobs:
       - eb/setup
       - aws-cli/setup
       - run:
+          name: Install Front-End Dependencies
+          command: |
+            echo "NODE --version" 
+            echo $(node --version)
+            echo "NPM --version" 
+            echo $(npm --version)
+            npm run frontend:install
+            # TODO: Lint the frontend
+      - run:
+          name: Front-End Build
+          command: |
+            npm run frontend:build
+      - run:
           name: Front-End Deploy
           command: |
             npm run frontend:deploy
+      - run:
+          name: Install API Dependencies
+          command: |
+            npm run api:install
+      # TODO: Build the backend API
+      - run:
+          name: API Build
+          command: |
+            npm run api:build
       - run:
           name: API Deploy
           command: |
@@ -76,9 +98,7 @@ workflows:
       - build:
         filters:
         branches:
-          only: # only branches matching the below regex filters will run
+          only:
             - main
             - master
-      - deploy:
-          requires:
-            - build
+      - deploy
