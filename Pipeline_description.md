@@ -1,5 +1,7 @@
 # The different steps in the pipeline
 
+![Alt text](/screenshots/pipline_diagram.png)
+
 ## 1. Install Front-End Dependencies:
 
 Install dependencies need for the front end to run and work properly

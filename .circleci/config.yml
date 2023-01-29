@@ -7,7 +7,7 @@ orbs:
   browser-tools: circleci/browser-tools@1.2.3
   # different jobs are calles later in the workflows sections
 jobs:
-  build-deploy:
+  build:
     docker:
       # the base image can run most needed actions with orbs
       - image: cimg/node:14.15-browsers
@@ -15,8 +15,6 @@ jobs:
       # install node and checkout code
       - node/install:
           node-version: "14.15"
-      - eb/setup
-      - aws-cli/setup
       - checkout
       # Use root level package.json to install dependencies in the frontend app
       - run:
@@ -43,10 +41,6 @@ jobs:
           name: Front-End Test
           command: |
             npm run frontend:test
-      - run:
-          name: Front-End Deploy
-          command: |
-            npm run frontend:deploy
       # TODO: Install dependencies in the the backend API
       - run:
           name: Install API Dependencies
@@ -57,6 +51,22 @@ jobs:
           name: API Build
           command: |
             npm run api:build
+
+  build-deploy:
+    docker:
+      # the base image can run most needed actions with orbs
+      - image: cimg/node:14.15-browsers
+    steps:
+      # install node and checkout code
+      - node/install:
+          node-version: "14.15"
+      - eb/setup
+      - aws-cli/setup
+      - checkout
+      - run:
+          name: Front-End Deploy
+          command: |
+            npm run frontend:deploy
       - run:
           name: API Deploy
           command: |
@@ -64,4 +74,12 @@ jobs:
 workflows:
   udagram:
     jobs:
-      - build-deploy
+      - build:
+        filters:
+        branches:
+              only:  # only branches matching the below regex filters will run
+                - main
+                -master
+      - deploy:
+          requires:
+            - build
